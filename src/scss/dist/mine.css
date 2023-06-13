@@ -64,7 +64,7 @@
   height: 340px;
   font-size: 3px;
   border: 4px solid #414141;
-  transition: top 5s cubic-bezier(0.51, 0.02, 0.1, 0.97);
+  transition: transform 5s, top 5s cubic-bezier(0.51, 0.02, 0.1, 0.97);
 }
 
 .elevator__door {
@@ -102,17 +102,19 @@
 .floor__btn {
   padding: 10px 10px 12px 10px;
   color: #fff;
-  background: #797979;
+  background: #8F8F8F;
+  transition: 0.1s ease-in-out;
 }
 .floor__btn--active {
   color: #6a0000;
 }
 .floor__btn--next {
   background: #6a0000;
-  color: #006a00;
+  color: white;
 }
 .floor__btn:hover {
-  color: #006a00;
+  background: #6a0000;
+  color: white;
 }
 
 @media (max-width: 768px) {

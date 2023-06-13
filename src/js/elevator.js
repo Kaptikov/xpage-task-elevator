@@ -43,7 +43,7 @@ function elevatorMovement() {
 
   setTimeout(() => {
     currentBtn.classList.remove('floor__btn--active')
-    console.log('Класс floor__btn--active удален')
+    console.log('класс floor__btn--active удален')
     currentBtn.classList.add('floor__btn--active')
     elevator.style.top = `${btnY}px`
     elevator.style.transform = `translate(-50%, -45%)`
@@ -60,7 +60,7 @@ function elevatorMovement() {
   setTimeout(() => {
     setTimeout(() => {
       currentBtn.classList.remove('floor__btn--active')
-      console.log('Класс floor__btn--active удален')
+      console.log('класс floor__btn--active удален')
       // console.log('2')
       doorLeft.style.width = `50%`
       doorRight.style.width = `50%`

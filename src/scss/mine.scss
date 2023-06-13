@@ -69,7 +69,7 @@
   height: 340px;
   font-size: 3px;
   border: 4px solid #414141;
-  transition: top 5s cubic-bezier(.51, .02, .1, .97);
+  transition: transform 5s, top 5s cubic-bezier(.51, .02, .1, .97);
 }
 
 .elevator__door {
@@ -111,7 +111,8 @@
   // height: 30px;
   padding: 10px 10px 12px 10px;
   color: #fff;
-  background: rgb(121, 121, 121);
+  background: $gray;
+  transition: 0.1s ease-in-out;
 
   &--active {
     color: $red;
@@ -120,11 +121,12 @@
   &--next {
     background: $red;
 
-    color: $green;
+    color: white;
   }
 
   &:hover {
-    color: $green;
+    background: $red;
+    color: white;
   }
 }
 

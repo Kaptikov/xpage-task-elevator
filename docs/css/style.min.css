@@ -491,7 +491,7 @@ a:hover {
   height: 340px;
   font-size: 3px;
   border: 4px solid #414141;
-  transition: top 5s cubic-bezier(0.51, 0.02, 0.1, 0.97);
+  transition: transform 5s, top 5s cubic-bezier(0.51, 0.02, 0.1, 0.97);
 }
 
 .elevator__door {
@@ -529,17 +529,19 @@ a:hover {
 .floor__btn {
   padding: 10px 10px 12px 10px;
   color: #fff;
-  background: rgb(121, 121, 121);
+  background: #8F8F8F;
+  transition: 0.1s ease-in-out;
 }
 .floor__btn--active {
   color: rgb(106, 0, 0);
 }
 .floor__btn--next {
   background: rgb(106, 0, 0);
-  color: rgb(0, 106, 0);
+  color: white;
 }
 .floor__btn:hover {
-  color: rgb(0, 106, 0);
+  background: rgb(106, 0, 0);
+  color: white;
 }
 
 @media (max-width: 768px) {
