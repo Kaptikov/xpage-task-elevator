@@ -8,20 +8,19 @@ var elevator = document.querySelector('#elevator');
 var clickedBtns = [];
 var firstFloorBtn = firstFloor.getBoundingClientRect().top + window.pageYOffset;
 console.log(firstFloorBtn);
+var isMovingToFirstFloor = false;
 floorBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
-    if (btn.classList.contains('floor__btn--active')) {
+    if (btn.classList.contains('floor__btn--active') || isMovingToFirstFloor) {
       return;
     }
 
-    var btnY = btn.getBoundingClientRect().top + window.pageYOffset;
     floorBtns.forEach(function (btn) {
       return btn.classList.remove('floor__btn--active');
     });
     clickedBtns.push(btn);
-    console.log(clickedBtns);
     btn.classList.add('floor__btn--next');
-    console.log(btnY);
+    console.log(clickedBtns);
 
     if (clickedBtns.length === 1) {
       elevatorMovement();
@@ -36,49 +35,56 @@ function elevatorMovement() {
 
   var currentBtn = clickedBtns[0];
   var btnY = currentBtn.getBoundingClientRect().top + window.pageYOffset;
-  setTimeout(function () {
-    currentBtn.classList.remove('floor__btn--active');
-    console.log('класс floor__btn--active удален');
-    currentBtn.classList.add('floor__btn--active');
-    elevator.style.top = "".concat(btnY, "px");
-    elevator.style.transform = "translate(-50%, -45%)"; // doorLeft.style.width = `0`
-    // doorRight.style.width = `0`
-    // console.log('1')
-  }, 6000);
-  setTimeout(function () {
+  console.log(btnY);
+  currentBtn.classList.remove('floor__btn--active');
+  currentBtn.classList.add('floor__btn--active');
+  currentBtn.classList.remove('floor__btn--next');
+  console.log('удален class next');
+  elevator.style.top = "".concat(btnY, "px");
+  elevator.style.transform = "translate(-50%, -19.75%)";
+  elevator.addEventListener('transitionend', function () {
     doorLeft.style.width = "5%";
     doorRight.style.width = "5%";
-  }, 10000);
-  setTimeout(function () {
-    setTimeout(function () {
+    doorLeft.addEventListener('transitionend', function () {
       currentBtn.classList.remove('floor__btn--active');
-      console.log('класс floor__btn--active удален'); // console.log('2')
-
+      console.log('удален class active');
       doorLeft.style.width = "50%";
       doorRight.style.width = "50%";
-    }, 4000);
-    clickedBtns.shift();
-    console.log('удален первый элемент массива');
-    currentBtn.classList.remove('floor__btn--next');
-    console.log(clickedBtns); // console.log('3')
+      doorLeft.addEventListener('transitionend', function () {
+        clickedBtns.shift();
+        console.log('удален первый элемент массива');
+        console.log(clickedBtns);
 
-    if (clickedBtns.length > 0) {
-      elevatorMovement();
-    } else {
-      setTimeout(function () {
-        elevator.style.top = "".concat(firstFloorBtn, "px");
-        elevator.style.transform = "translate(-50%, -45%)";
-        console.log('Массив пуст');
-        firstFloor.classList.add('floor__btn--active');
-      }, 9000);
-      setTimeout(function () {
-        doorLeft.style.width = "5%";
-        doorRight.style.width = "5%";
-      }, 14000);
-      setTimeout(function () {
-        doorLeft.style.width = "50%";
-        doorRight.style.width = "50%";
-      }, 17000);
-    }
-  }, 11000);
+        if (clickedBtns.length > 0) {
+          elevatorMovement();
+        } else {
+          isMovingToFirstFloor = true;
+          console.log(isMovingToFirstFloor);
+          elevator.style.top = "".concat(firstFloorBtn, "px");
+          elevator.style.transform = "translate(-50%, -19.75%)";
+          firstFloor.classList.add('floor__btn--active');
+          doorLeft.style.width = "5%";
+          doorRight.style.width = "5%";
+          doorLeft.addEventListener('transitionend', function () {
+            doorLeft.style.width = "50%";
+            doorRight.style.width = "50%";
+            doorLeft.addEventListener('transitionend', function () {
+              isMovingToFirstFloor = false;
+              console.log(isMovingToFirstFloor);
+            }, {
+              once: true
+            });
+          }, {
+            once: true
+          });
+        }
+      }, {
+        once: true
+      });
+    }, {
+      once: true
+    });
+  }, {
+    once: true
+  });
 }

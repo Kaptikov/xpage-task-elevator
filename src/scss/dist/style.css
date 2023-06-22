@@ -80,8 +80,7 @@
 
 .swiper-backface-hidden .swiper-slide {
   transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* 3D Effects */
@@ -130,8 +129,10 @@
 /* CSS Mode */
 .swiper-css-mode > .swiper-wrapper {
   overflow: auto;
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
 }
 .swiper-css-mode > .swiper-wrapper::-webkit-scrollbar {
   display: none;
@@ -154,16 +155,14 @@
   order: 9999;
 }
 .swiper-centered.swiper-horizontal > .swiper-wrapper > .swiper-slide:first-child {
-  -webkit-margin-start: var(--swiper-centered-offset-before);
-          margin-inline-start: var(--swiper-centered-offset-before);
+  margin-inline-start: var(--swiper-centered-offset-before);
 }
 .swiper-centered.swiper-horizontal > .swiper-wrapper::before {
   height: 100%;
   width: var(--swiper-centered-offset-after);
 }
 .swiper-centered.swiper-vertical > .swiper-wrapper > .swiper-slide:first-child {
-  -webkit-margin-before: var(--swiper-centered-offset-before);
-          margin-block-start: var(--swiper-centered-offset-before);
+  margin-block-start: var(--swiper-centered-offset-before);
 }
 .swiper-centered.swiper-vertical > .swiper-wrapper::before {
   width: 100%;
@@ -186,7 +185,7 @@
   top: 50%;
   width: calc(var(--swiper-navigation-size) / 44 * 27);
   height: var(--swiper-navigation-size);
-  margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
   z-index: 10;
   cursor: pointer;
   display: flex;
@@ -405,7 +404,6 @@ a:hover {
   line-height: 120%;
   text-transform: uppercase;
   margin-top: -14px;
-  width: -moz-max-content;
   width: max-content;
 }
 .link__view-all:hover {
@@ -422,8 +420,7 @@ a:hover {
   height: 100%;
   top: 0;
   left: 0;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .building__container {
@@ -471,7 +468,7 @@ a:hover {
   transform: translate(-50%, 50%);
   font-size: 16px;
   font-weight: 600;
-  color: rgb(106, 0, 0);
+  color: #6a0000;
 }
 
 .elevator {
@@ -491,7 +488,7 @@ a:hover {
 }
 
 .elevator__door {
-  background: rgb(106, 0, 0);
+  background: #6a0000;
   width: 50%;
   height: 100%;
 }
@@ -522,18 +519,18 @@ a:hover {
   transition: 0.1s ease-in-out;
 }
 .floor__btn--active {
-  color: rgb(106, 0, 0);
-  text-shadow: 0 0 10px rgb(106, 0, 0);
-  border: 4px solid rgb(106, 0, 0);
+  color: #6a0000;
+  text-shadow: 0 0 10px #6a0000;
+  border: 4px solid #6a0000;
   box-shadow: 0 0 7px 2px rgba(106, 0, 0, 0.5), inset 0 0 7px 2px rgba(106, 0, 0, 0.5);
 }
 .floor__btn--next {
   color: white;
-  text-shadow: 0 0 7px rgb(255, 255, 255);
+  text-shadow: 0 0 7px white;
   box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.5), inset 0 0 7px 2px rgba(255, 255, 255, 0.5);
 }
 .floor__btn:hover {
   color: white;
-  text-shadow: 0 0 7px rgb(255, 255, 255);
+  text-shadow: 0 0 7px white;
   box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.5), inset 0 0 7px 2px rgba(255, 255, 255, 0.5);
 }

@@ -29,11 +29,12 @@
   min-height: 100%;
   overflow: hidden;
   display: flex;
+  // justify-content: center;
   flex-direction: column;
 }
 
 ._container {
-  max-width: 1316px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 0px 15px;
   box-sizing: content-box;
