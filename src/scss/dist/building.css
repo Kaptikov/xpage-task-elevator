@@ -99,7 +99,7 @@
   border: 4px solid #6a0000;
   box-shadow: 0 0 7px 2px rgba(106, 0, 0, 0.5), inset 0 0 7px 2px rgba(106, 0, 0, 0.5);
 }
-.floor__btn--next {
+undo commit .floor__btn--next {
   color: white;
   text-shadow: 0 0 7px white;
   box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.5), inset 0 0 7px 2px rgba(255, 255, 255, 0.5);

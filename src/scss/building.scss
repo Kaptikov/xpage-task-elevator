@@ -1,0 +1,131 @@
+@import "variables.scss";
+
+.building {
+  &__container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+.elevator__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  justify-self: end;
+  border: 2px solid gray;
+  max-width: 100px;
+  width: 100%;
+}
+
+.floors__container {
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 10px 0;
+}
+
+.floor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+  width: 100%;
+  height: 80px;
+  border: 1px solid white;
+  margin-top: 10px;
+
+  &:not(:first-child) {
+    margin-bottom: 10px;
+  }
+
+  &__number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    font-size: 16px;
+    font-weight: 600;
+    color: $red;
+  }
+}
+
+.elevator {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: gray;
+  max-width: 60px;
+  width: 100%;
+  height: 80px;
+  border: 2px solid #414141;
+  transition: top 1s cubic-bezier(.51, .02, .1, .97),
+    transform 1s;
+  // transition-delay: 1s;
+}
+
+.elevator__door {
+  background: $red;
+  width: 50%;
+  height: 100%;
+
+
+  &--left {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border: 1px solid gray;
+    transition: 1s ease-in-out;
+    transition-delay: 1s;
+  }
+
+  &--right {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    border: 1px solid gray;
+    transition: 1s ease-in-out;
+    transition-delay: 1s;
+  }
+}
+
+.floor__btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 4px solid white;
+  border-radius: 50%;
+
+  color: #fff;
+  transition: 0.1s ease-in-out;
+
+  &--active {
+    color: $red;
+    text-shadow: 0 0 10px rgb(106, 0, 0, 1);
+    border: 4px solid $red;
+    box-shadow: 0 0 7px 2px rgb(106, 0, 0, 0.5),
+      inset 0 0 7px 2px rgb(106, 0, 0, 0.5);
+
+  }
+  undo commit
+
+  &--next {
+    color: white;
+    text-shadow: 0 0 7px rgb(255, 255, 255, 1);
+    box-shadow: 0 0 7px 2px rgb(255, 255, 255, 0.5),
+      inset 0 0 7px 2px rgb(255, 255, 255, 0.5);
+  }
+
+  &:hover {
+    color: white;
+    text-shadow: 0 0 7px rgb(255, 255, 255, 1);
+    box-shadow: 0 0 7px 2px rgb(255, 255, 255, 0.5),
+      inset 0 0 7px 2px rgb(255, 255, 255, 0.5);
+  }
+}
