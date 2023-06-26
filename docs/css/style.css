@@ -478,7 +478,6 @@ a:hover {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  bottom: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
