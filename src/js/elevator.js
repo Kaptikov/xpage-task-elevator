@@ -14,8 +14,6 @@ console.log(firstFloorBtn)
 
 let isMovingDown = false
 
-// elevator.style.top = `85.50%`
-
 floorBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.classList.contains('floor__btn--active')) {
@@ -95,7 +93,6 @@ function elevatorMovement(queue) {
               queue.shift()
               console.log('удален первый элемент массива')
 
-              // currentBtn.classList.remove('floor__btn--next')
               console.log(queue)
 
               if (queue.length > 0) {
@@ -117,11 +114,11 @@ function elevatorMovement(queue) {
                       doorLeft.addEventListener(
                         'transitionend',
                         () => {
-                          isMovingDown = false
                           closeDoors()
                           doorLeft.addEventListener(
                             'transitionend',
                             () => {
+                              isMovingDown = false
                               elevatorMovement(upQueue)
                             },
                             { once: true }

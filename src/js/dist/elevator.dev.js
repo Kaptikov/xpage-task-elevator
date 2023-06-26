@@ -9,8 +9,7 @@ var upQueue = [];
 var downQueue = [];
 var firstFloorBtn = firstFloor.getBoundingClientRect().top + window.pageYOffset;
 console.log(firstFloorBtn);
-var isMovingDown = false; // elevator.style.top = `85.50%`
-
+var isMovingDown = false;
 floorBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
     if (btn.classList.contains('floor__btn--active')) {
@@ -74,8 +73,7 @@ function elevatorMovement(queue) {
       closeDoors();
       doorLeft.addEventListener('transitionend', function () {
         queue.shift();
-        console.log('удален первый элемент массива'); // currentBtn.classList.remove('floor__btn--next')
-
+        console.log('удален первый элемент массива');
         console.log(queue);
 
         if (queue.length > 0) {
@@ -88,9 +86,9 @@ function elevatorMovement(queue) {
             elevator.addEventListener('transitionend', function () {
               openDoors();
               doorLeft.addEventListener('transitionend', function () {
-                isMovingDown = false;
                 closeDoors();
                 doorLeft.addEventListener('transitionend', function () {
+                  isMovingDown = false;
                   elevatorMovement(upQueue);
                 }, {
                   once: true
