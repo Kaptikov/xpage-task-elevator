@@ -10,6 +10,7 @@ var downQueue = [];
 var firstFloorBtn = firstFloor.getBoundingClientRect().top + window.pageYOffset;
 console.log(firstFloorBtn);
 var isMovingDown = false;
+var lastBtnY = firstFloorBtn;
 floorBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
     if (btn.classList.contains('floor__btn--active')) {
@@ -19,20 +20,43 @@ floorBtns.forEach(function (btn) {
     var btnY = btn.getBoundingClientRect().top + window.pageYOffset;
     floorBtns.forEach(function (btn) {
       return btn.classList.remove('floor__btn--active');
-    });
+    }); // if (
+    //   elevator.style.top === '' ||
+    //   parseFloat(elevator.style.top) < btnY ||
+    //   isMovingDown === false
+    // ) {
+    //   upQueue.push(btn)
+    //   console.log('элемент в массиве {$upQueue}')
+    //   console.log(upQueue)
+    // } else {
+    //   downQueue.push(btn)
+    //   console.log('элемент в массиве {$downQueue}')
+    //   console.log(downQueue)
+    // }
 
-    if (elevator.style.top === '' || parseFloat(elevator.style.top) < btnY) {
-      downQueue.push(btn);
-    } else {
+    if (isMovingDown) {
       upQueue.push(btn);
+      console.log('элемент в массиве upQueue');
+      console.log(upQueue);
+    } else {
+      if (btnY > lastBtnY) {
+        downQueue.push(btn);
+        console.log('элемент в массиве downQueue');
+        console.log(downQueue);
+      } else if (btnY < lastBtnY) {
+        upQueue.push(btn);
+        console.log('элемент в массиве upQueue');
+        console.log(upQueue);
+      }
     }
 
+    lastBtnY = btnY;
     btn.classList.add('floor__btn--next');
     console.log(btnY);
 
     if (upQueue.length === 1 && downQueue.length === 0 && isMovingDown === false) {
       elevatorMovement(upQueue);
-    } else if (downQueue.length === 1 && upQueue.length === 0) {
+    } else if (downQueue.length === 1 && upQueue.length === 0 && isMovingDown === false) {
       elevatorMovement(downQueue);
     }
   });
