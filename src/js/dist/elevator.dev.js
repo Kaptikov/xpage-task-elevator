@@ -9,15 +9,22 @@ var upQueue = [];
 var downQueue = [];
 var firstFloorBtn = firstFloor.getBoundingClientRect().top + window.pageYOffset;
 console.log(firstFloorBtn);
+var btnFloorArr = [];
 var isMovingDown = false;
 var lastBtnY = firstFloorBtn;
+var transitionElem = 1;
+var preBtnFloor = 1;
+var btnFloor = 1;
 floorBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
-    if (btn.classList.contains('floor__btn--active')) {
+    if (btn.classList.contains('floor__btn--active') || btn.classList.contains('floor__btn--next')) {
       return;
     }
 
     var btnY = btn.getBoundingClientRect().top + window.pageYOffset;
+    btnFloor = parseInt(btn.dataset.floor);
+    btnFloorArr.push(btnFloor);
+    console.log(btnFloorArr);
     floorBtns.forEach(function (btn) {
       return btn.classList.remove('floor__btn--active');
     }); // if (
@@ -47,6 +54,10 @@ floorBtns.forEach(function (btn) {
         upQueue.push(btn);
         console.log('элемент в массиве upQueue');
         console.log(upQueue);
+      } else if (btnY === lastBtnY) {
+        upQueue.push(btn);
+        console.log('элемент в массиве upQueue');
+        console.log(upQueue);
       }
     }
 
@@ -62,6 +73,39 @@ floorBtns.forEach(function (btn) {
   });
 });
 
+function transitionElevator() {
+  btnFloor = btnFloorArr[0];
+
+  if (Math.abs(btnFloorArr[1] - preBtnFloor) < Math.abs(btnFloor - preBtnFloor)) {
+    var swap = btnFloorArr[0];
+    btnFloorArr[0] = btnFloorArr[1];
+    btnFloorArr[1] = swap;
+  }
+
+  if (btnFloor > preBtnFloor) {
+    var transitionDuration = (btnFloor - preBtnFloor) * 500;
+    console.log(transitionDuration);
+    elevator.style.transitionDuration = "".concat(transitionDuration, "ms");
+    console.log('up');
+    preBtnFloor = btnFloor;
+  } else if (btnFloor < preBtnFloor) {
+    var _transitionDuration = (btnFloor - preBtnFloor) * -500;
+
+    console.log(_transitionDuration);
+    elevator.style.transitionDuration = "".concat(_transitionDuration, "ms");
+    console.log('down');
+    preBtnFloor = btnFloor;
+  } else if (isMovingDown === true) {
+    var _transitionDuration2 = (1 - preBtnFloor) * -500;
+
+    console.log(_transitionDuration2);
+    elevator.style.transitionDuration = "".concat(_transitionDuration2, "ms");
+    preBtnFloor = 1;
+  }
+
+  btnFloorArr.shift();
+}
+
 function openDoors() {
   doorLeft.style.width = "5%";
   doorRight.style.width = "5%";
@@ -73,6 +117,7 @@ function closeDoors() {
 }
 
 function moveElevator(btnY) {
+  transitionElevator();
   elevator.style.top = "".concat(btnY, "px");
   elevator.style.transform = "translate(-50%, -19.75%)";
 }

@@ -11,18 +11,29 @@ const downQueue = []
 const firstFloorBtn =
   firstFloor.getBoundingClientRect().top + window.pageYOffset
 console.log(firstFloorBtn)
+const btnFloorArr = []
 
 let isMovingDown = false
 
 let lastBtnY = firstFloorBtn
+let transitionElem = 1
+let preBtnFloor = 1
+let btnFloor = 1
 
 floorBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    if (btn.classList.contains('floor__btn--active')) {
+    if (
+      btn.classList.contains('floor__btn--active') ||
+      btn.classList.contains('floor__btn--next')
+    ) {
       return
     }
 
     const btnY = btn.getBoundingClientRect().top + window.pageYOffset
+    btnFloor = parseInt(btn.dataset.floor)
+    btnFloorArr.push(btnFloor)
+
+    console.log(btnFloorArr)
 
     floorBtns.forEach(btn => btn.classList.remove('floor__btn--active'))
 
@@ -53,6 +64,10 @@ floorBtns.forEach(btn => {
         upQueue.push(btn)
         console.log('элемент в массиве upQueue')
         console.log(upQueue)
+      } else if (btnY === lastBtnY) {
+        upQueue.push(btn)
+        console.log('элемент в массиве upQueue')
+        console.log(upQueue)
       }
     }
 
@@ -78,6 +93,36 @@ floorBtns.forEach(btn => {
   })
 })
 
+function transitionElevator() {
+  btnFloor = btnFloorArr[0]
+  if (
+    Math.abs(btnFloorArr[1] - preBtnFloor) < Math.abs(btnFloor - preBtnFloor)
+  ) {
+    const swap = btnFloorArr[0]
+    btnFloorArr[0] = btnFloorArr[1]
+    btnFloorArr[1] = swap
+  }
+  if (btnFloor > preBtnFloor) {
+    const transitionDuration = (btnFloor - preBtnFloor) * 500
+    console.log(transitionDuration)
+    elevator.style.transitionDuration = `${transitionDuration}ms`
+    console.log('up')
+    preBtnFloor = btnFloor
+  } else if (btnFloor < preBtnFloor) {
+    const transitionDuration = (btnFloor - preBtnFloor) * -500
+    console.log(transitionDuration)
+    elevator.style.transitionDuration = `${transitionDuration}ms`
+    console.log('down')
+    preBtnFloor = btnFloor
+  } else if (isMovingDown === true) {
+    const transitionDuration = (1 - preBtnFloor) * -500
+    console.log(transitionDuration)
+    elevator.style.transitionDuration = `${transitionDuration}ms`
+    preBtnFloor = 1
+  }
+  btnFloorArr.shift()
+}
+
 function openDoors() {
   doorLeft.style.width = `5%`
   doorRight.style.width = `5%`
@@ -89,6 +134,7 @@ function closeDoors() {
 }
 
 function moveElevator(btnY) {
+  transitionElevator()
   elevator.style.top = `${btnY}px`
   elevator.style.transform = `translate(-50%, -19.75%)`
 }
