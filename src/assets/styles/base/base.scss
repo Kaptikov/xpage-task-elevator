@@ -1,0 +1,30 @@
+@import "variables.scss";
+
+.wrapper {
+	min-height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+._container {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 0px 15px;
+	box-sizing: content-box;
+}
+
+a {
+	transition: color 0.2s ease-in-out;
+
+}
+
+a:hover {
+	color: $red;
+}
+
+.page {
+	flex: 1 1 auto;
+}
+
+.title {}
